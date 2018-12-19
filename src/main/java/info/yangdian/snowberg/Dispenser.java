@@ -34,7 +34,7 @@ public class Dispenser extends SimpleChannelInboundHandler<FullHttpRequest>
         }
         else
         {
-            ctx.writeAndFlush(controller.execute(request)).addListener(new ChannelFutureListener()
+            ctx.writeAndFlush(controller.doRequest(request)).addListener(new ChannelFutureListener()
             {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception
