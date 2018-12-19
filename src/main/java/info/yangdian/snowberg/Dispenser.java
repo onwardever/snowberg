@@ -1,17 +1,16 @@
 package info.yangdian.snowberg;
 
 import io.netty.channel.*;
-import io.netty.handler.codec.http.FullHttpRequest;
 
 @ChannelHandler.Sharable
-public class Dispenser extends SimpleChannelInboundHandler<FullHttpRequest>
+public class Dispenser extends SimpleChannelInboundHandler<HttpRequestContext>
 {
     private Registry registry = Registry.INSTANCE;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception
+    protected void channelRead0(ChannelHandlerContext ctx, HttpRequestContext request) throws Exception
     {
-        System.out.println("here:"+request.uri());
+        System.out.println("here:"+request.getUri());
 
         Controller controller = registry.find(request);
 

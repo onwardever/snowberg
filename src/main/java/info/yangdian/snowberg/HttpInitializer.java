@@ -6,8 +6,6 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
-import io.netty.handler.codec.http.HttpServerCodec;
-import io.netty.handler.stream.ChunkedWriteHandler;
 
 public class HttpInitializer extends ChannelInitializer<Channel>
 {
@@ -17,11 +15,12 @@ public class HttpInitializer extends ChannelInitializer<Channel>
         ChannelPipeline pipeline = ch.pipeline();
 
         pipeline.addLast("decoder", new HttpRequestDecoder());
-                //.addLast("des", new Dispenser());
+                //.addLast("request-converter", new RequestConversionHandler());
 
         pipeline
                 .addLast("aggregator",new HttpObjectAggregator(65535))
                 .addLast("encoder", new HttpResponseEncoder())
+                .addLast("request-converter", new RequestConversionHandler())
                 .addLast("dispenser", new Dispenser());
 
     }

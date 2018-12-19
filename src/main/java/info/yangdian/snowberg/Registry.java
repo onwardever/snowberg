@@ -21,8 +21,8 @@ public class Registry
         map.put(path, controller);
     }
 
-    public Controller find(HttpRequest request)
+    public Controller find(HttpRequestContext request)
     {
-        return map.get(new QueryStringDecoder(request.uri()).path());
+        return map.get(request.getPath());
     }
 }

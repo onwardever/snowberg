@@ -1,47 +1,45 @@
 package info.yangdian.snowberg;
 
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponse;
 
 public abstract class Controller
 {
-    public HttpResponse doGet(FullHttpRequest request)
+    public HttpResponse doGet(HttpRequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doPost(FullHttpRequest request)
+    public HttpResponse doPost(HttpRequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doPut(FullHttpRequest request)
+    public HttpResponse doPut(HttpRequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doDelete(FullHttpRequest request)
+    public HttpResponse doDelete(HttpRequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doRequest(FullHttpRequest request)
+    public HttpResponse doRequest(HttpRequestContext request)
     {
-        if(request.method()==HttpMethod.GET)
+        if(request.getType()== HttpRequestContext.RequestType.GET)
             return doGet(request);
 
-        if(request.method()==HttpMethod.POST)
+        if(request.getType()== HttpRequestContext.RequestType.POST)
             return doPost(request);
 
-        if(request.method()==HttpMethod.PUT)
+        if(request.getType()== HttpRequestContext.RequestType.PUT)
             return doPut(request);
 
-        if(request.method()==HttpMethod.DELETE)
+        if(request.getType()== HttpRequestContext.RequestType.DELETE)
             return doDelete(request);
 
         return execute(request);
     }
 
-    public abstract HttpResponse execute(FullHttpRequest request);
+    public abstract HttpResponse execute(HttpRequestContext request);
 }
