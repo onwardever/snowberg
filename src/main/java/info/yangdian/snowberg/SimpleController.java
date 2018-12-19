@@ -3,7 +3,6 @@ package info.yangdian.snowberg;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.*;
-
 import java.nio.charset.Charset;
 
 public class SimpleController extends Controller
