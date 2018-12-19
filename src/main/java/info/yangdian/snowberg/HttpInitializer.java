@@ -20,7 +20,7 @@ public class HttpInitializer extends ChannelInitializer<Channel>
                 //.addLast("des", new Dispenser());
 
         pipeline
-                //.addLast("aggregator",new HttpObjectAggregator(65535))
+                .addLast("aggregator",new HttpObjectAggregator(65535))
                 .addLast("encoder", new HttpResponseEncoder())
                 .addLast("dispenser", new Dispenser());
 

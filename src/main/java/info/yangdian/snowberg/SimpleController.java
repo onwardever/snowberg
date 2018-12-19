@@ -3,12 +3,13 @@ package info.yangdian.snowberg;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.*;
+
 import java.nio.charset.Charset;
 
 public class SimpleController extends Controller
 {
     @Override
-    public HttpResponse execute(HttpRequest request)
+    public HttpResponse execute(FullHttpRequest request)
     {
         ByteBuf content = Unpooled.copiedBuffer("hello,world!", Charset.forName("utf-8"));
 
