@@ -6,14 +6,11 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.util.internal.logging.InternalLoggerFactory;
-
-import javax.xml.stream.FactoryConfigurationError;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Server
+public final class Snowberg
 {
     private final int port;
 
@@ -24,7 +21,7 @@ public final class Server
         this.modules.add(module);
     }
 
-    public Server(int port)
+    public Snowberg(int port)
     {
         this.port = port;
     }

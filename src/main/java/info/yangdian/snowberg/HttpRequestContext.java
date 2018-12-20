@@ -29,9 +29,6 @@ public class HttpRequestContext
         this.rawQuery = decoder.rawQuery();
         this.parameters = decoder.parameters();
         this.content = getStringValue(request.content());
-
-        System.out.println("uri:"+this.uri);
-        System.out.println("path:"+this.path);
     }
 
     public RequestType getType()

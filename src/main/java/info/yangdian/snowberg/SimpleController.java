@@ -17,7 +17,7 @@ public class SimpleController extends Controller
 
         response.headers().set("Content-Type", "text/plain;charset=UTF-8");
         response.headers().set("Content_Length", content.readableBytes());
-        response.headers().set("Server", "snowberg/1.0");
+        response.headers().set("Snowberg", "snowberg/1.0");
 
         return response;
     }
