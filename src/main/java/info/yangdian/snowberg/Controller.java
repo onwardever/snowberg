@@ -2,7 +2,7 @@ package info.yangdian.snowberg;
 
 import io.netty.handler.codec.http.HttpResponse;
 
-public abstract class Controller
+public abstract class Controller implements Describable
 {
     public HttpResponse doGet(HttpRequestContext request)
     {

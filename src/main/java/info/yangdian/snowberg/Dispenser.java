@@ -2,8 +2,6 @@ package info.yangdian.snowberg;
 
 import io.netty.channel.*;
 
-import java.net.InetSocketAddress;
-
 @ChannelHandler.Sharable
 public class Dispenser extends SimpleChannelInboundHandler<HttpRequestContext>
 {

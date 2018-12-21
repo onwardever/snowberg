@@ -8,6 +8,12 @@ import java.nio.charset.Charset;
 public class SimpleController extends Controller
 {
     @Override
+    public String desc()
+    {
+        return "a simple demo";
+    }
+
+    @Override
     public HttpResponse execute(HttpRequestContext request)
     {
         ByteBuf content = Unpooled.copiedBuffer("hello,world!", Charset.forName("utf-8"));
