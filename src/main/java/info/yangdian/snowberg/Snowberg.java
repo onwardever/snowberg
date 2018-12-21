@@ -1,5 +1,7 @@
 package info.yangdian.snowberg;
 
+import info.yangdian.husky.log.Logger;
+import info.yangdian.husky.log.LoggerFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -12,6 +14,8 @@ import java.util.List;
 
 public final class Snowberg
 {
+    private static final Logger logger = LoggerFactory.getInstance(Snowberg.class);
+
     private final int port;
 
     private List<Module> modules = new ArrayList<>();
@@ -30,7 +34,7 @@ public final class Snowberg
     {
         for (Module module : modules)
         {
-            module.register(Registry.INSTANCE);
+            module.register(PathTrie.PATHS);
         }
 
         EventLoopGroup group = new NioEventLoopGroup();

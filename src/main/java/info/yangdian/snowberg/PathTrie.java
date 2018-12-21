@@ -1,9 +1,13 @@
 package info.yangdian.snowberg;
 
+import info.yangdian.husky.log.Logger;
+import info.yangdian.husky.log.LoggerFactory;
 import java.util.*;
 
 public class PathTrie<T extends Describable> implements Paths<T>
 {
+    private static final Logger logger = LoggerFactory.getInstance(PathTrie.class);
+
     public static final Paths<Controller> PATHS = new PathTrie<>();
 
     private static final String separator = "/";
@@ -15,9 +19,11 @@ public class PathTrie<T extends Describable> implements Paths<T>
     {
         String[] paths = decodePath(path);
 
-        if(match(paths,0,root)!=null)
+        TrieNode found = match(paths, 0, root);
+
+        if(found!=null)
         {
-            // TODO: 2018/12/21 处理存在匹配路径的情况
+            logger.warn("path existed. PATH-TOADD: {},PATH-EXISTED: {}", path, found.fullPath());
             return;
         }
 
@@ -29,6 +35,8 @@ public class PathTrie<T extends Describable> implements Paths<T>
         }
 
         current.value = t;
+
+        logger.info("path added. PATH: {} , DESC: {}", current.fullPath(), current.value.desc());
     }
 
     @Override

@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.QueryStringDecoder;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -89,6 +91,11 @@ public class HttpRequestContext
     public void setParameters(Map<String, List<String>> parameters)
     {
         this.parameters = parameters;
+    }
+
+    public void addParameter(String key, String value)
+    {
+        this.parameters.put(key, Arrays.asList(value.split(",")));
     }
 
     public String getContent()

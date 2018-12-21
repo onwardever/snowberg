@@ -3,8 +3,8 @@ package info.yangdian.snowberg;
 public class SimpleModule extends Module
 {
     @Override
-    public void register(Registry registry)
+    public void register(Paths<Controller> paths)
     {
-        registry.register("/hello", new SimpleController());
+        paths.add("/hello", new SimpleController());
     }
 }
