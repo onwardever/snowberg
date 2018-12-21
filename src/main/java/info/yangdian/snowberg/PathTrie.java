@@ -91,10 +91,6 @@ public class PathTrie<T extends Describable> implements Paths<T>
      * 进行到这里，说明已加入的路径的最后一个节点依然匹配，返回该节点，如上{name2}。
      *
      *
-     * @param paths
-     * @param offset
-     * @param current
-     * @return
      */
     private TrieNode match(String[] paths,int offset,TrieNode current)
     {
