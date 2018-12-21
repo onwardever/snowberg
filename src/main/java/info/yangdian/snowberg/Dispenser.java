@@ -4,7 +4,6 @@ import info.yangdian.husky.log.Logger;
 import info.yangdian.husky.log.LoggerFactory;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpResponse;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpVersion;
 import java.util.LinkedHashMap;
@@ -22,14 +21,14 @@ public class Dispenser extends SimpleChannelInboundHandler<HttpRequestContext>
     {
         Controller controller = findController(request.getUri(), request);
 
-        HttpResponse response;
-
         if(controller==null)
-            response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND);
+        {
+            ctx.writeAndFlush(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)).addListener(ChannelFutureListener.CLOSE);
+        }
         else
-            response = controller.doRequest(request);
-
-        ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+        {
+            ctx.writeAndFlush(controller.doRequest(request)).addListener(ChannelFutureListener.CLOSE);
+        }
     }
 
     private Controller findController(String uri, HttpRequestContext requestContext)
