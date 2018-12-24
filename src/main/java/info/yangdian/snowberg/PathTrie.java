@@ -23,7 +23,7 @@ public class PathTrie<T extends Describable> implements Paths<T>
 
         if(found!=null)
         {
-            logger.warn("path existed. PATH-TOADD: {},PATH-EXISTED: {}", path, found.fullPath());
+            logger.warn("path existed. PATH-TOADD: {},PATH-EXIST: {}", path, found.fullPath());
             return;
         }
 
@@ -192,7 +192,11 @@ public class PathTrie<T extends Describable> implements Paths<T>
 
             if (found != null)
             {
-                found.value = child.value;
+                if (child.value == null)
+                    ;
+                else
+                    found.value = child.value;//先验解析路径后，不可能出现同一个节点两种解析
+
                 return found;
             }
             else

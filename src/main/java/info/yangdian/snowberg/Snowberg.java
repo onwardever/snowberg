@@ -54,7 +54,7 @@ public final class Snowberg
             public void operationComplete(ChannelFuture future) throws Exception
             {
                 if (future.isSuccess())
-                    System.out.println("成功启动服务器");
+                    logger.info("snowberg started.");
                 else
                 {
                     future.cause().printStackTrace();

@@ -27,6 +27,7 @@ public class Dispenser extends SimpleChannelInboundHandler<HttpRequestContext>
         }
         else
         {
+            logger.debug("Controller: {} analyze PATH: {}", controller.desc(), request.getUri());
             ctx.writeAndFlush(controller.doRequest(request)).addListener(ChannelFutureListener.CLOSE);
         }
     }
