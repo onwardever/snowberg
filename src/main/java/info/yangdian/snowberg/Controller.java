@@ -1,45 +1,44 @@
 package info.yangdian.snowberg;
 
-import io.netty.handler.codec.http.HttpResponse;
-
+// TODO: 2018/12/24 异步处理用户逻辑
 public abstract class Controller implements Describable
 {
-    public HttpResponse doGet(HttpRequestContext request)
+    public ResponseContext doGet(RequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doPost(HttpRequestContext request)
+    public ResponseContext doPost(RequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doPut(HttpRequestContext request)
+    public ResponseContext doPut(RequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doDelete(HttpRequestContext request)
+    public ResponseContext doDelete(RequestContext request)
     {
         return execute(request);
     }
 
-    public HttpResponse doRequest(HttpRequestContext request)
+    public ResponseContext doRequest(RequestContext request)
     {
-        if(request.getType()== HttpRequestContext.RequestType.GET)
+        if(request.getType()== RequestContext.RequestType.GET)
             return doGet(request);
 
-        if(request.getType()== HttpRequestContext.RequestType.POST)
+        if(request.getType()== RequestContext.RequestType.POST)
             return doPost(request);
 
-        if(request.getType()== HttpRequestContext.RequestType.PUT)
+        if(request.getType()== RequestContext.RequestType.PUT)
             return doPut(request);
 
-        if(request.getType()== HttpRequestContext.RequestType.DELETE)
+        if(request.getType()== RequestContext.RequestType.DELETE)
             return doDelete(request);
 
         return execute(request);
     }
 
-    public abstract HttpResponse execute(HttpRequestContext request);
+    public abstract ResponseContext execute(RequestContext request);
 }

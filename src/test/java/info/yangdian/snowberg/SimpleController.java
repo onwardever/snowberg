@@ -14,12 +14,17 @@ public class SimpleController extends Controller
     }
 
     @Override
-    public HttpResponse execute(HttpRequestContext request)
+    public ResponseContext execute(RequestContext request)
     {
         ByteBuf content = Unpooled.copiedBuffer("hello,world!", Charset.forName("utf-8"));
 
-        FullHttpResponse response =
-                new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK,content);
+        //FullHttpResponse response =
+          //      new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK,content);
+
+        ResponseContext response = new ResponseContext(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+
+        response.setContent("hello,world!");
+
 
         response.headers().set("Content-Type", "text/plain;charset=UTF-8");
         response.headers().set("Content_Length", content.readableBytes());

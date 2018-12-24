@@ -15,12 +15,13 @@ public class HttpInitializer extends ChannelInitializer<Channel>
         ChannelPipeline pipeline = ch.pipeline();
 
         pipeline.addLast("decoder", new HttpRequestDecoder());
-                //.addLast("request-converter", new RequestConversionHandler());
+                //.addLast("request-converter", new RequestToContext());
 
         pipeline
-                .addLast("aggregator",new HttpObjectAggregator(65535))
+                .addLast("aggregator", new HttpObjectAggregator(65535))
                 .addLast("encoder", new HttpResponseEncoder())
-                .addLast("request-converter", new RequestConversionHandler())
+                .addLast("request-converter", new RequestToContext())
+                .addLast("response-converter", new ResponseFromContext())
                 .addLast("dispenser", new Dispenser());
 
     }

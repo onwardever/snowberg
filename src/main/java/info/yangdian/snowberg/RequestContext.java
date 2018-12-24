@@ -4,12 +4,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.QueryStringDecoder;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class HttpRequestContext
+public class RequestContext
 {
     private RequestType type;
     private String uri;
@@ -19,9 +18,9 @@ public class HttpRequestContext
     private Map<String, List<String>> parameters;
     private String content;
 
-    public HttpRequestContext() {}
+    public RequestContext() {}
 
-    public HttpRequestContext(FullHttpRequest request)
+    public RequestContext(FullHttpRequest request)
     {
         this.type = RequestType.valueOf(request.method());
         this.uri = request.uri();
@@ -141,10 +140,5 @@ public class HttpRequestContext
 
             return OTHER;
         }
-    }
-
-    public static void main(String[] args)
-    {
-
     }
 }

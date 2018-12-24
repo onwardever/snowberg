@@ -2,27 +2,24 @@ package info.yangdian.snowberg;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpHeaders;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpVersion;
+import io.netty.handler.codec.http.*;
 import java.nio.charset.Charset;
 
-public class HttpResponseContext
+public class ResponseContext
 {
     private DefaultFullHttpResponse response;
 
-    public HttpResponseContext(HttpVersion version, HttpResponseStatus status)
+    public ResponseContext(HttpVersion version, HttpResponseStatus status)
     {
         response = new DefaultFullHttpResponse(version, status);
     }
 
-    public HttpResponseContext(HttpResponseStatus status)
+    public ResponseContext(HttpResponseStatus status)
     {
         this(HttpVersion.HTTP_1_1, status);
     }
 
-    public HttpResponseContext()
+    public ResponseContext()
     {
         this(HttpResponseStatus.OK);
     }
@@ -32,10 +29,15 @@ public class HttpResponseContext
         return this.response.headers();
     }
 
-    public HttpResponseContext setContent(String content)
+    HttpResponse getResponse()
+    {
+        return this.response;
+    }
+
+    public ResponseContext setContent(String content)
     {
         ByteBuf byteBuf = Unpooled.copiedBuffer(content, Charset.forName("utf-8"));
-        this.response.replace(byteBuf);
+        this.response = (DefaultFullHttpResponse) (this.response.replace(byteBuf));
         return this;
     }
 }
